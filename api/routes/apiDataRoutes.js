@@ -5,7 +5,7 @@ const checkAuth = require('../middleware/check-auth');
 
 const ApiDtl=require ('../models/apiModel');
 
-router.get('/',checkAuth,(req,res,next)=>{
+router.get('/',(req,res,next)=>{
     ApiDtl.find()
     .select('_id apiName apiCName backendIP port backendEndPoint urlReWritingWith fullBackendUrl gatewayUrl consumer producer state description clientId clientSecret isActive registeredBy')
     .exec()
