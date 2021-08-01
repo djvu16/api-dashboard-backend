@@ -5,7 +5,7 @@ const checkAuth = require('../middleware/check-auth');
 
 const ApiDtl=require ('../models/apiModel');
 
-router.get('/',(req,res,next)=>{
+router.get('/',checkAuth,(req,res,next)=>{
     ApiDtl.find()
     .select('_id apiName apiCName backendIP port backendEndPoint urlReWritingWith fullBackendUrl gatewayUrl consumer producer state description clientId clientSecret isActive registeredBy')
     .exec()
@@ -65,7 +65,7 @@ router.post('/',checkAuth,(req,res,next)=>{
     });
 });
 
-router.get('/:apiId',(req,res,next)=>{
+router.get('/:apiId',checkAuth,(req,res,next)=>{
     const id=req.params.apiId;
     ApiDtl.findById(id)
     .exec()
@@ -86,7 +86,7 @@ router.get('/:apiId',(req,res,next)=>{
         });
     });
 });
-router.patch('/:apiId',(req,res,next)=>{
+router.patch('/:apiId',checkAuth,(req,res,next)=>{
         const id=req.params.apiId;
         const updateOps ={};
         console.log(req.body);
@@ -107,7 +107,7 @@ router.patch('/:apiId',(req,res,next)=>{
             })
         });
     });
-router.delete('/:apiId',(req,res,next)=>{
+router.delete('/:apiId',checkAuth,(req,res,next)=>{
         const id= req.params.apiId;
         ApiDtl.remove({_id:id})
         .exec()

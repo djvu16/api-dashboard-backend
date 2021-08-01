@@ -46,7 +46,11 @@ app.use(express.static("public"));
 
 
 
-const uri="mongodb://"+process.env.DB_HOST+":"+process.env.DB_PORT+"/"+process.env.DB_NAME;
+/* const uri="mongodb://"+process.env.DB_HOST+":"+process.env.DB_PORT+"/"+process.env.DB_NAME; */
+const uri="mongodb+srv://"+process.env.DB_USER+":"+process.env.DB_PASS+"@cluster0.gxvwk.mongodb.net/"+process.env.DB_NAME;
+
+/* console.log(uri); */
+
     mongoose.set('useUnifiedTopology',true);
     mongoose.set('useCreateIndex',true);
 
@@ -78,4 +82,8 @@ app.use((error,req,res,next)=>{
 
 
 //listen on port 3001
-app.listen(3001,()=>(console.log('listening on port 3001')));
+let port = process.env.PORT;
+if(port == null || port == ""){
+    port=3001;
+}
+app.listen(port,()=>(console.log('Server started successfully')));
