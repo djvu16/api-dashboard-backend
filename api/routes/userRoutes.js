@@ -90,7 +90,8 @@ router.post('/login',(req,res,next)=>{
                     });
                     return res.status(200).json({
                         message:"Authentication Successful",
-                        token:token
+                        token:token,
+                        isAuthenticate:true
                     });
                 }
                 res.status(401).json({
